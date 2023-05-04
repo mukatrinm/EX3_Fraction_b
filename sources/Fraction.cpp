@@ -11,6 +11,9 @@ using namespace std;
 // https://stackoverflow.com/questions/26643695/converting-a-floating-point-decimal-value-to-a-fraction
 // TODO: add overflow checks
 Fraction::Fraction(double number) {
+    double frac_part = trunc((number - trunc(number)) * 1000) / 1000.0;
+    number = static_cast<int>(number) + frac_part;
+
     int cycles = 10;
     double precision = 5e-4;
     int sign = number > 0 ? 1 : -1;
@@ -63,6 +66,9 @@ std::istream& ariel::operator>>(std::istream& input, Fraction& frac) {
     if (denominator == 0) {
         std::__throw_invalid_argument("denominator can't be zero");
     }
+
+    frac.numerator_ = numerator;
+    frac.denominator_ = denominator;
 
     return input;
 }
