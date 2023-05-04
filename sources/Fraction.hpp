@@ -36,6 +36,8 @@ class Fraction {
     Fraction operator--(int);  // post-decrement
 
     bool operator==(const Fraction& other) const;
+    friend bool operator==(const Fraction& lhs, const double rhs);
+    friend bool operator==(const double lhs, const Fraction& rhs);
     bool operator>(const Fraction& other) const;
     friend bool operator>(const Fraction& lhs, const double rhs);
     friend bool operator>(const double lhs, const Fraction& rhs);

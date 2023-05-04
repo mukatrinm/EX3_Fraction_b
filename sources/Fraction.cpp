@@ -190,6 +190,20 @@ bool Fraction::operator==(const Fraction& other) const {
     return FractionToDouble(Fraction(numerator_, denominator_)) == FractionToDouble(other);
 }
 
+bool ariel::operator==(const Fraction& lhs, const double rhs) {
+    // make sure rhs has only 3 digits after decimal point
+    double frac_part = trunc((rhs - trunc(rhs)) * 1000) / 1000.0;
+    double num_3_percision = static_cast<int>(rhs) + frac_part;
+    return Fraction::FractionToDouble(lhs) == num_3_percision;
+}
+
+bool ariel::operator==(const double lhs, const Fraction& rhs) {
+    // make sure rhs has only 3 digits after decimal point
+    double frac_part = trunc((lhs - trunc(lhs)) * 1000) / 1000.0;
+    double num_3_percision = static_cast<int>(lhs) + frac_part;
+    return num_3_percision == Fraction::FractionToDouble(rhs);
+}
+
 bool Fraction::operator>(const Fraction& other) const {
     return FractionToDouble(Fraction(numerator_, denominator_)) > FractionToDouble(other);
 }
